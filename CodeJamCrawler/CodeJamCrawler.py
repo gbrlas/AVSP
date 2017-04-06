@@ -28,7 +28,17 @@ def process_body(soup, year):
             print link.get('href')
             global id_counter
             path_to_zip = 'dataset/' + str(id_counter) + '_' + score + '.zip'
-            urllib.urlretrieve(link.get('href'), path_to_zip)
+            success = False
+            for alive_count in range(5):
+                try:
+                    urllib.urlretrieve(link.get('href'), path_to_zip)
+                    success = True
+                except IOError as e:
+                    print "error reading"
+                    # give him some time to recover
+                    time.sleep(0.3)
+            if not success:
+                continue
             zip_ref = zipfile.ZipFile(path_to_zip, 'r')
             #print path_to_file
             for file_name in zip_ref.namelist():
@@ -65,6 +75,7 @@ def main():
         years = ["08", "09", "10", "11", "12", "13", "14"]
         for year in years:
             t = threading.Thread(target=process_contest, args=(year, lines))
+            t.daemon = True
             t.start()
             threads.append(t)
             print "created thread for year", year
