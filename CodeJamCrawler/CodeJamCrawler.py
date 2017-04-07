@@ -52,7 +52,20 @@ def process_body(soup, year):
         time.sleep(0.1)
 
 def process_contestant(url, year):
-    page = urllib.urlopen(url).read()
+
+    page = None
+
+    for alive_count in range(3):
+        try:
+            page = urllib.urlopen(url).read()
+        except IOError as e:
+            print "error reading"
+            # give him some time to recover
+            time.sleep(0.3)
+
+    if page == None:
+        return
+
     soup = BeautifulSoup(page, 'html.parser')
     process_body(soup, year)
 
