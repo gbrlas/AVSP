@@ -1,0 +1,1 @@
+i;main(c,T){for(gets(T);i++<atoi(T);)for(printf("Case #%d: ",i);c=getchar(),putchar(c>32?"yhesocvxduiglbkrztnwjpfmaq"[c-97]:c)-10;);}

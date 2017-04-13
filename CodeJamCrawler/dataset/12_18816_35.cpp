@@ -1,0 +1,1 @@
+T;N;S;p;t[100];i;j;a;n;m;c(int*a,int*b){return*a-*b;}main(){for(scanf("%d",&T);i++<T;){for(j=!scanf("%d%d%d",&N,&S,&p);j<N;)scanf("%d",t+j++);qsort(t,N,4,&c);for(a=0;j--;)n=t[j],m=n>1?n<29?(n+4)/3:10:n,m<p?j=0:m==p&&(n-1)%3>0&n<28?S>0?++a,S--:0:++a;printf("Case #%d: %d\n",i,a);}}
