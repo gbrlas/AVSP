@@ -1,0 +1,1 @@
+in order to glue output of glueCsvs to outputSummary (which in the begining should have only the header of the csv ) one needs to pipe the output of glueCsvs.sh to outputSummary.csv
