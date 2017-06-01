@@ -1,3 +1,4 @@
+#filename;number_of_modules;lines_of_code;lines_of_code_per_module;McCabes_cyclomatic_complexity;McCabes_cyclomatic_complexity_per_module;lines_of_comment;lines_of_comment_per_module;lines_of_code_per_line_of_comment;McCabes_cyclomatic_complexity_per_line_of_comment;IF4;IF4_per_module;IF4_visible;IF4_visible_per_module;IF4_concrete;IF4_concrete;rejected_lines_of_code
 0.0_14_16505_55.csv;1;43;43.000;12;12.000;0;0.000;******;******;0;0.000;0;0.000;0;0.000;3
 0.0_14_16507_55.csv;1;28;28.000;4;4.000;0;0.000;******;------;0;0.000;0;0.000;0;0.000;1
 0.0_14_16509_55.csv;1;28;28.000;4;4.000;0;0.000;******;------;0;0.000;0;0.000;0;0.000;1
