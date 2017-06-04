@@ -21,13 +21,15 @@ do_while_loop_tag = "{http://www.srcML.org/srcML/src}do"
 decl_stmt_tag = "{http://www.srcML.org/srcML/src}decl_stmt"
 decl_tag = "{http://www.srcML.org/srcML/src}decl"
 
+template_tag = "{http://www.srcML.org/srcML/src}template"
+
 traversable_blocks_with_namespace = [class_tag, \
                                      block_tag, \
                                     function_tag, \
                                     for_loop_tag, \
                                     while_loop_tag, \
                                     do_while_loop_tag, \
-                                    "{http://www.srcML.org/srcML/src}template", \
+                                    template_tag, \
                                      public_modifier, \
                                      private_modifier, \
                                      protected_modifier
