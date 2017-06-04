@@ -6,6 +6,7 @@ features = {}
 block_tag = "{http://www.srcML.org/srcML/src}block"
 class_tag = "{http://www.srcML.org/srcML/src}class"
 function_tag = "{http://www.srcML.org/srcML/src}function"
+function_decl_tag = "{http://www.srcML.org/srcML/src}function_decl"
 param_list_tag = "{http://www.srcML.org/srcML/src}parameter_list"
 param_tag = "{http://www.srcML.org/srcML/src}parameter"
 
@@ -113,10 +114,12 @@ def get_number_of_classes(node):
 def get_number_of_member_functions(level, node):
     cnt_member_funs = 0
 
+    #print 'parent' + ' ' * level, node.tag
     for child in node:
+        #print child.tag
         if child.tag in traversable_blocks_with_namespace:
             cnt_member_funs += get_number_of_member_functions(level + 1, child)
-        if node != None and node.tag in class_modifiers and child.tag == function_tag:
+        if node != None and node.tag in class_modifiers and (child.tag == function_tag or child.tag == function_decl_tag):
             cnt_member_funs += 1
 
     return cnt_member_funs
@@ -135,23 +138,57 @@ def get_number_of_member_variables(node):
         if child.tag in traversable_blocks_with_namespace:
             cnt_member_vars += get_number_of_member_variables(child)
         if node != None and node.tag in class_modifiers:
-            print child.tag
             if child.tag == decl_stmt_tag:
                 count_decl_stmt_vars = count_vars(child)
                 cnt_member_vars += count_decl_stmt_vars
 
     return cnt_member_vars
 
+def count_functions(node):
+    cnt_funs = 0
+    for child in node:
+        if child.tag == block_tag:
+            for c in child:
+                if c.tag in class_modifiers:
+                    for cc in c:
+                        if cc.tag == function_decl_tag or cc.tag == function_tag:
+                            cnt_funs += 1
+    return cnt_funs
+
+
+def get_min_fun_per_class(node):
+    cnt_member_funs = 150000
+
+    if node.tag == class_tag:
+        cnt_member_funs = count_functions(node)
+
+    for child in node:
+        if child.tag in traversable_blocks_with_namespace:
+            cnt_member_funs = min(get_min_fun_per_class(child), cnt_member_funs)
+    return cnt_member_funs
+
+def get_max_fun_per_class(node):
+    cnt_member_funs = 0
+
+    if node.tag == class_tag:
+        cnt_member_funs = count_functions(node)
+
+    for child in node:
+        if child.tag in traversable_blocks_with_namespace:
+            cnt_member_funs = max(get_max_fun_per_class(child), cnt_member_funs)
+    return cnt_member_funs
+
 def start_parse():
     tree = ET.parse(sys.stdin)
     root = tree.getroot()
-    #parse(root, 0)
     cnt_max_nested_loops = get_max_number_of_nested_loops(root, 0)
     cnt_max_params_in_decl = get_max_parameters_in_declaration(root)
     cnt_max_nesting_depth = get_max_nesting_depth(root, 0)
     cnt_classes = get_number_of_classes(root)
     cnt_member_funs = get_number_of_member_functions(0, root)
     cnt_member_vars = get_number_of_member_variables(root)
+    cnt_min_member_funs = get_min_fun_per_class(root)
+    cnt_max_member_funs = get_max_fun_per_class(root)
 
     features['max_nested_loops'] = cnt_max_nested_loops
     features['max_params_in_decl'] = cnt_max_params_in_decl
@@ -159,8 +196,16 @@ def start_parse():
     features['cnt_classes'] = cnt_classes
     features['member_funs'] = cnt_member_funs
     features['member_vars'] = cnt_member_vars
+    features['min_member_funs'] = cnt_min_member_funs
+    features['max_member_funs'] = cnt_max_member_funs
 
-    print features
+    import csv
+    sorted_keys = features.keys()
+    sorted_keys.sort()
+    print 'header', sorted_keys
+    print 'vals', [features[key] for key in sorted_keys]
+
+    print 'feature count', len(features)
 
 
 start_parse()
