@@ -8,5 +8,6 @@ do
   #echo $f
   #echo $name
   ~/Downloads/srcML/bin/srcml $f >> "./processed_asts/$name.srcml"
+  printf "$name;" >> ast_features.csv
   python ASTExtractor.py < "./processed_asts/$name.srcml" >> ast_features.csv
 done
