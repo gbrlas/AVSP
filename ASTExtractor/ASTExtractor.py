@@ -180,6 +180,10 @@ def get_max_fun_per_class(node):
             cnt_member_funs = max(get_max_fun_per_class(child), cnt_member_funs)
     return cnt_member_funs
 
+import sys
+def printf(format, *args):
+    sys.stdout.write(format % args)
+
 def start_parse():
     tree = ET.parse(sys.stdin)
     root = tree.getroot()
@@ -204,10 +208,16 @@ def start_parse():
     import csv
     sorted_keys = features.keys()
     sorted_keys.sort()
-    print 'header', sorted_keys
-    print 'vals', [features[key] for key in sorted_keys]
+    header = sorted_keys
+    for i in range(len(header)-1):
+      printf("%s;", header[i])
+    printf("%s\n", header[len(header)-1])
+    #print 'vals', [features[key] for key in sorted_keys]
+    for i in range(len(sorted_keys)-1):
+      printf("%f;", features[sorted_keys[i]])
+    printf("%f\n", features[sorted_keys[len(sorted_keys)-1]])
 
-    print 'feature count', len(features)
+    #print 'feature count', len(features)
 
 
 start_parse()
