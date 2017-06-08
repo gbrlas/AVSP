@@ -16,6 +16,7 @@ Finally, we implemented some basic classification models to see how good the res
 <a href="#Req">Requirements</a><br>
 <a href="#analyzers">Code Analyzers</a><br>
 <a href='#Results'>Example results</a><br>
+<a href='#improvements'>Further improvements</a><br>
 
 ## Requirements
 <a id='Req'></a>
@@ -88,6 +89,7 @@ model for code quality classification (feature vector is already small as is, it
 So, given our dataset of ~18k feature vectors, and given the fact that we were able to provide results of each author in Code Jam competition, we had
 all the data we need to build a supervised model for classification. The current ratings we decided for are 1-5 grades, corresponding to programmers results
 in competitions (0-100) points.
+
 Another problem we came upon is the fact that many programmers competed on a few competitions - meaning we would have 5,10 or even 15 source codes from the same author.
 This turned out the be a problem because models could possibly learn to recognize authors code, which would prove too easy for them to recognize while testing.
 Before building any models, we had to split the dataset feature vectors by authors. 80% of authors went to training set, while remaining was kept for testing.
@@ -104,3 +106,14 @@ Best results were obtained with following models:
 
 [Extra Tree Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.tree.ExtraTreeClassifier.html) which is just a more general version of [Random Forest Classifier](https://en.wikipedia.org/wiki/Random_forest)
 ```
+## Further improvements
+<a id='improvements'></a>
+
+    1.  Given the fact that we had only 34 features, the first logical thing would be to somehow obtain more features. We deduced that with 
+        ~80-100 features we could possibly get to 85%+ accuracy score with our model.
+        
+    2.  Search for better models for classification
+    
+    3.  Play around with labels, try different rating systems
+    
+    4.  Try regression aswell, the dataset is more oriented to regression due to the domain of features, which makes classification a harder problem for this dataset.
