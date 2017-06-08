@@ -38,6 +38,9 @@ The follow online tools for feature extraction were used:
     
     3. [srcML](https://en.wikipedia.org/wiki/SrcML)
     
+After extraction, it proved troublesome to parse features from different tools into python readable data.
+In the repository, there are few scripts that help with that problem - should you feel the desire to try and test the dataset by yourself.
+
 Features extracted were following:
 
 ```
