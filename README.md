@@ -1,20 +1,81 @@
--- lab assignment text --
+# AVSP
+[Analysis of Massive Data Sets](https://www.fer.unizg.hr/en/course/aomds)
 
-Predikcija kvalitete programera na temelju source koda, tj. njegovog stila - code stylometry
+## Project theme: Source code quality prediction 
 
-Ideja:
+Project is written in Python 3, using Jupyter Notebook. 
+Goal of this project was to explore online tools for feature extraction from programmers source code.
+Source code was reduced to .cpp code only, due to many reasons, mainly because its usage is widespread and easy to obtain online.
+Dataset consisted of ~18k source codes obtained from Google-s [Code Jam](https://code.google.com/codejam/) competitions.
+Online tools provided us, unfortunately, with only 34 different features.
+After feature extraction, we wanted to analyze and see if we could find any linear correlation between features.
+Finally, we implemented some basic classification models to see how good the results can get with a very small feature vector.
 
-kod → [feature extraction] → features → [learning model] → kvaliteta programera
+## Table of contents
 
-Koraci:
-Pročitati ideju na http://freedom-to-tinker.com/2015/01/21/anonymous-programmers-can-be-identified-by-analyzing-coding-style/
-Pročitati članak https://www.cs.drexel.edu/~ac993/papers/caliskan_deanonymizing.pdf
+<a href="#Req">Requirements</a><br>
+<a href="#analyzers">Code Analyzers</a><br>
+<a href='#Results'>Example results</a><br>
 
-Pokrenuti alat https://github.com/calaylin/CodeStylometry , proučiti kakav output (kakve feature) izbacuje.
-Alternativno, može se koristiti i neki od jednostavnijih alata sa https://en.wikipedia.org/wiki/List_of_tools_for_static_code_analysis#C.2C_C.2B.2B , npr. http://cppcheck.sourceforge.net/
-Preuzeti velik broj C++ kodova s nekog online judgea, npr. Codeforces ili Google Code Jam koji su koristili autori alata.
-Potražiti korelacije između ratinga programera i featurea koje izbacuje alat i prikazati rezultate npr. tablično ili grafički.
-Ekstra zadatak za ambiciozne: koristeći neki alat za strojno učenje, istrenirati model koji predviđa rating ili klasu na temelju featurea koda.
+## Requirements
+<a id='Req'></a>
 
-Alternativno:
-istražiti neku drugu primjenu code stylometryja ili općenito ekstrakcije informacija iz source koda.
+
+```
+Python 3
+Jupyter Notebook
+```
+
+# Code Analyzers
+<a id='analyzers'></a>
+
+The follow online tools for feature extraction were used:
+
+    1. [CodeAnalyzer](http://www.codeanalyzer.teel.ws/)
+    
+    2. [CCCC - C and C++ Code Counter](http://cccc.sourceforge.net/)
+    
+    3. [srcML](https://en.wikipedia.org/wiki/SrcML)
+    
+Features extracted were following:
+
+```
+0   number_of_modules
+1   lines_of_code
+2   lines_of_code_per_module
+3   McCabes_cyclomatic_complexity
+4   McCabes_cyclomatic_complexity_per_module
+5   lines_of_comment
+6   lines_of_comment_per_module
+7   lines_of_code_per_line_of_comment
+8   McCabes_cyclomatic_complexity_per_line_of_comment
+9   IF4
+10  IF4_per_module
+11  IF4_visible
+12  IF4_visible_per_module
+13  IF4_concrete
+14  IF4_concrete
+15  rejected_lines_of_code
+
+16  Files
+17  Lines
+18  AVG Len
+19  Code
+20  Comments
+21  White SP
+22  Cd/Cm+WS
+23  Cd/Cm
+24  Cd/WS
+25  % Code
+26  cnt_classes
+27  max_member_funs
+28  max_nested_loops
+29  max_nesting_depth
+30  max_params_in_decl
+31  member_funs
+32  member_vars
+33  min_member_funs
+```
+
+## Results
+<a id='Results'></a>
