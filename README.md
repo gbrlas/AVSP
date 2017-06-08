@@ -32,11 +32,11 @@ Jupyter Notebook
 
 The follow online tools for feature extraction were used:
 
-    1. [CodeAnalyzer](http://www.codeanalyzer.teel.ws/)
+1. [CodeAnalyzer](http://www.codeanalyzer.teel.ws/)
     
-    2. [CCCC - C and C++ Code Counter](http://cccc.sourceforge.net/)
+2. [CCCC - C and C++ Code Counter](http://cccc.sourceforge.net/)
     
-    3. [srcML](https://en.wikipedia.org/wiki/SrcML)
+3. [srcML](https://en.wikipedia.org/wiki/SrcML)
     
 After extraction, it proved troublesome to parse features from different tools into python readable data.
 In the repository, there are few scripts that help with that problem - should you feel the desire to try and test the dataset by yourself.
@@ -104,21 +104,20 @@ If the model would return bellow 50%, we would instantly ignore it.
 Should we get more than 50%, we would try optimizing hyperparameters, to see how can we could go with it.
 Best results were obtained with following models:
 
-```
 [Decision Tree Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
 
 [Extra Tree Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.tree.ExtraTreeClassifier.html) which is just a more general version of [Random Forest Classifier](https://en.wikipedia.org/wiki/Random_forest)
-```
+
+
 ## Further improvements
 <a id='improvements'></a>
-
-    1.  Given the fact that we had only 34 features, the first logical thing would be to somehow obtain more features. We deduced that with 
+1.  Given the fact that we had only 34 features, the first logical thing would be to somehow obtain more features. We deduced that with 
         ~80-100 features we could possibly get to 85%+ accuracy score with our model.
         
-    2.  Search for better models for classification
-    
-    3.  Play around with labels, try different rating systems
-    
-    4.  Try regression aswell, the dataset is more oriented to regression due to the domain of features, which makes classification a harder problem for this dataset.
-    
-    5.  Try and find some nonlinear correlations within features.
+2.  Search for better models for classification.
+
+3.  Play around with labels, try different rating systems.
+
+4.  Try regression aswell, the dataset is more oriented to regression due to the domain of features, which makes classification a harder problem for this dataset.
+
+5.  Try and find some nonlinear correlations within features.
