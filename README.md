@@ -117,3 +117,5 @@ Best results were obtained with following models:
     3.  Play around with labels, try different rating systems
     
     4.  Try regression aswell, the dataset is more oriented to regression due to the domain of features, which makes classification a harder problem for this dataset.
+    
+    5.  Try and find some nonlinear correlations within features.
