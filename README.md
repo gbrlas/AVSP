@@ -58,7 +58,7 @@ Features extracted were following:
 11  IF4_visible
 12  IF4_visible_per_module
 13  IF4_concrete
-14  IF4_concrete
+14  IF4_concrete_per_module
 15  rejected_lines_of_code
 
 16  Files
