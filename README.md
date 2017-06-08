@@ -79,3 +79,28 @@ Features extracted were following:
 
 ## Results
 <a id='Results'></a>
+
+As we explained before, tools extracted 34 features.
+We wanted to see how correlated the features could be. The results, along with visualization, can be found in <b>StatisticalAnalysis.ipynb</b> notebook.
+The results of this linear uncorrelation proved to be beneficial only because we could be sure that we could use all of features for building our
+model for code quality classification (feature vector is already small as is, it would be a shame to have to reduce it even further than 34).
+
+So, given our dataset of ~18k feature vectors, and given the fact that we were able to provide results of each author in Code Jam competition, we had
+all the data we need to build a supervised model for classification. The current ratings we decided for are 1-5 grades, corresponding to programmers results
+in competitions (0-100) points.
+Another problem we came upon is the fact that many programmers competed on a few competitions - meaning we would have 5,10 or even 15 source codes from the same author.
+This turned out the be a problem because models could possibly learn to recognize authors code, which would prove too easy for them to recognize while testing.
+Before building any models, we had to split the dataset feature vectors by authors. 80% of authors went to training set, while remaining was kept for testing.
+We tried building simple models to see what results could be achieved with just a lazy model import, fit and predict aproach.
+Results can be found inside <b>MachineLearningModels.ipynb</b> notebook.
+
+If the model would return bellow 50%, we would instantly ignore it.
+
+Should we get more than 50%, we would try optimizing hyperparameters, to see how can we could go with it.
+Best results were obtained with following models:
+
+```
+[Decision Tree Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)
+
+[Extra Tree Classifier](http://scikit-learn.org/stable/modules/generated/sklearn.tree.ExtraTreeClassifier.html) which is just a more general version of [Random Forest Classifier](https://en.wikipedia.org/wiki/Random_forest)
+```
